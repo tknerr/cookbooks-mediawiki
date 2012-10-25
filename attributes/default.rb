@@ -5,6 +5,7 @@
 # Copyright 2011, ccat
 
 default[:mediawiki][:directory] = "/var/www/mediawiki"
+default[:mediawiki][:version] = "1.19.2"
 
 default[:mediawiki][:wgSitename] = "mediawiki"
 default[:mediawiki][:wgMetaNamespace] = "Mediawiki" # Link to wgSitename

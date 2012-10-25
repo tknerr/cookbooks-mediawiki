@@ -23,8 +23,8 @@ template "/tmp/set_pass.sql" do
  not_if do File.exists?(node[:mediawiki][:directory]) end
 end
 
-remote_file "/tmp/mediawiki-1.17.0.tar.gz" do
- source "http://download.wikimedia.org/mediawiki/1.17/mediawiki-1.17.0.tar.gz"
+remote_file "/tmp/mediawiki-#{node[:mediawiki][:version]}.tar.gz" do
+ source "http://download.wikimedia.org/mediawiki/1.19/mediawiki-#{node[:mediawiki][:version]}.tar.gz"
  owner "root"
  group "root"
  mode "0640"
@@ -38,8 +38,8 @@ script "set_mediawiki" do
   cwd "/tmp"
   not_if do File.exists?(node[:mediawiki][:directory]) end
   code <<-EOH
-  tar -zxf mediawiki-1.17.0.tar.gz
-  mv mediawiki-1.17.0 #{node[:mediawiki][:directory]}
+  tar -zxf mediawiki-#{node[:mediawiki][:version]}.tar.gz
+  mv mediawiki-#{node[:mediawiki][:version]} #{node[:mediawiki][:directory]}
   chown -R #{node[:apache][:user]}:#{node[:apache][:group]} #{node[:mediawiki][:directory]}
   cd #{node[:mediawiki][:directory]}
   php maintenance/install.php --dbname #{node[:mediawiki][:wgDBname]} --dbpass #{node[:mediawiki][:wgDBpassword]}  --dbserver #{node[:mediawiki][:wgDBserver]} --dbuser #{node[:mediawiki][:wgDBuser]} --installdbpass #{node[:mediawiki][:installdbPass]}  --pass #{node[:mediawiki][:dbAdminPass]} --installdbuser root --lang #{node[:mediawiki][:wgLanguageCode]}  #{node[:mediawiki][:wgSitename]} #{node[:mediawiki][:dbAdminUser]}
