@@ -58,5 +58,5 @@ default[:mediawiki][:backup_frequency] ="weekly"
 
 default[:mediawiki][:access2config_folder] = "false"
 
-default[:mediawiki][:userLocalSettings] = [""]
+default[:mediawiki][:userLocalSettings] = ""
 
