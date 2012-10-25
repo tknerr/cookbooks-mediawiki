@@ -7,6 +7,14 @@
 default[:mediawiki][:directory] = "/var/www/mediawiki"
 default[:mediawiki][:version] = "1.19.2"
 
+# settings for using external smtp
+default[:mediawiki][:wgSMTP][:enabled] = false
+default[:mediawiki][:wgSMTP][:host] = "localhost"
+default[:mediawiki][:wgSMTP][:port] = 25
+default[:mediawiki][:wgSMTP][:auth] = false
+default[:mediawiki][:wgSMTP][:user] = ""
+default[:mediawiki][:wgSMTP][:pass] = ""
+
 default[:mediawiki][:wgSitename] = "mediawiki"
 default[:mediawiki][:wgMetaNamespace] = "Mediawiki" # Link to wgSitename
 default[:mediawiki][:wgScriptPath] = "mediawiki"

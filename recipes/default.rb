@@ -86,3 +86,11 @@ directory node[:mediawiki][:directory]+"/mw-config" do
   only_if {node[:mediawiki][:access2config_folder]=="false"}
 end
 
+if node[:mediawiki][:wgSMTP][:enabled]
+  ["mail", "Net_SMTP"].each do |pkg|
+    php_pear pkg do
+      action :install
+    end
+  end
+end
+
